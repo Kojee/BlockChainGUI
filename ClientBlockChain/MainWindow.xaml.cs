@@ -32,6 +32,7 @@ namespace ClientBlockChain
         private EndpointAddress mEp;
         private IWCF mChannel;
         private string mAddress = "net.pipe://localhost/WCFServices";
+        public Keystore Keystore;
 
         public MainWindow()
         {
@@ -42,6 +43,7 @@ namespace ClientBlockChain
             mChannel = ChannelFactory<IWCF>.CreateChannel(mBinding, mEp);
             AllocConsole();
             Console.WriteLine("Client Connected");
+            this.DataContext = this;
         }
 
 
@@ -51,6 +53,7 @@ namespace ClientBlockChain
             string command = Console.ReadLine();
             string[] exCommand = command.Split(' ');
             mChannel.LoadKeyStore(exCommand[0], exCommand[1]);
+            this.Keystore = new Keystore(mChannel.GetKeystore());
         }
 
         private void Button_Create_Click(object sender, RoutedEventArgs e)
