@@ -14,7 +14,7 @@ namespace ClientBlockChain
 
         private string mAddress;
         private bool mStatus;
-
+        private double mBalance;
         public bool Status
         {
             get
@@ -26,8 +26,20 @@ namespace ClientBlockChain
                 if (value != mStatus)
                 {
                     mStatus = value;
-                    NotifyPropertyChanged("Status");
                 }
+            }
+        }
+
+        public double Balance
+        {
+            get
+            {
+                return mBalance;
+            }
+            set
+            {
+                mBalance = value;
+                NotifyPropertyChanged("Balance");
             }
         }
         public string Address
