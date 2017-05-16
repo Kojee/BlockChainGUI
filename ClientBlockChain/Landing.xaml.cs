@@ -22,50 +22,50 @@ namespace ClientBlockChain
     /// </summary>
     public partial class Landing : Page
     {
-        [DllImport("Kernel32")]
-        public static extern void AllocConsole();
-
-        [DllImport("Kernel32")]
-        public static extern void FreeConsole();
         private NetNamedPipeBinding mBinding;
         private EndpointAddress mEp;
         private IWCF mChannel;
         private string mAddress = "net.pipe://localhost/WCFServices";
-        public Keystore Keystore;
+
+        public Keystore Keystore
+        {
+            get; set;
+        }
+
         public Window window;
+
         public Landing(Window window)
         {
             InitializeComponent();
             mBinding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
             mEp = new EndpointAddress(mAddress);
             mChannel = ChannelFactory<IWCF>.CreateChannel(mBinding, mEp);
-            AllocConsole();
-            Console.WriteLine("Client Connected");
             this.Keystore = new Keystore("No address loaded");
             this.DataContext = Keystore;
             this.window = window;
+            this.DataContext = this;
         }
 
         private void Button_Load_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Insert [name] [password]");
-            string command = Console.ReadLine();
-            string[] exCommand = command.Split(' ');
+            string[] exCommand = new string[2];
+            exCommand[0] = "marco1";
+            exCommand[1] = "password";
             mChannel.LoadKeyStore(exCommand[0], exCommand[1]);
-            this.Keystore = new Keystore(mChannel.GetKeystore());
-            window.Content = new Logged(window);
-
+            string address = mChannel.GetKeystore();
+            this.Keystore.Address = address;
+            this.Keystore.Balance = mChannel.GetBalance();
         }
 
         private void Button_Create_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Insert [name] [password]");
-            string command = Console.ReadLine();
-            string[] exCommand = command.Split(' ');
+            string[] exCommand = new string[2];
+            exCommand[0] = "marco1";
+            exCommand[1] = "password";
             mChannel.GenerateKeyStore(exCommand[0], exCommand[1]);
-            Console.WriteLine("Keystore {0} generato", mChannel.GetKeystore());
-            this.Keystore = new Keystore(mChannel.GetKeystore());
-            window.Content = new Logged(window);
+            string address = mChannel.GetKeystore();
+            this.Keystore.Address = address;
+            this.Keystore.Balance = mChannel.GetBalance();
         }
     }
 }
