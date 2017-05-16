@@ -54,7 +54,7 @@ namespace ClientBlockChain
             mChannel.LoadKeyStore(exCommand[0], exCommand[1]);
             this.Keystore = new Keystore(mChannel.GetKeystore());
             window.Content = new Logged(window);
-            
+
         }
 
         private void Button_Create_Click(object sender, RoutedEventArgs e)
