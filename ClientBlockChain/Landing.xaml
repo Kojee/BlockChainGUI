@@ -1,0 +1,42 @@
+﻿<Page x:Class="ClientBlockChain.Landing"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ClientBlockChain"
+      mc:Ignorable="d" 
+      Title="Landing" Height="350" Width="525" MinHeight="350" MinWidth="525" MaxHeight="350" MaxWidth="525">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="res/14.jpg"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Name="Menu" Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="_File" Height="{Binding ElementName=Menu, Path=ActualHeight}">
+                <MenuItem Header="_Load Keystore"></MenuItem>
+                <MenuItem Header="_Create Keystore"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <TextBlock Foreground="#E0E0E0" Grid.Row="1" Grid.ColumnSpan="2" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">Seleziona metodo di login:</TextBlock>
+        <Button Name="Button_Load" Background="#E0E0E0" Grid.Row="2" Grid.Column="0"  VerticalAlignment="Center" Height="50" Click="Button_Load_Click">Load</Button>
+        <Button Name="Button_Create" Background="#E0E0E0" Grid.Row="2" Grid.Column="1"  VerticalAlignment="Center" Height="50" Click="Button_Create_Click">Create</Button>
+        <StatusBar Name="Status_Bar" Grid.Row="3" Grid.ColumnSpan="2">
+            <StatusBarItem Height="20">
+                <TextBlock Name="Keystore_Status" Text="{Binding Path=Keystore.Status}"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem Height="20">
+                <TextBlock Name="Keystore_Address" Text="{Binding Path=Keystore.Address}"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Page>
