@@ -31,10 +31,10 @@
         <Button Name="Button_Create" Background="#E0E0E0" Grid.Row="2" Grid.Column="1"  VerticalAlignment="Center" Height="50" Click="Button_Create_Click">Create</Button>
         <StatusBar Name="Status_Bar" Grid.Row="3" Grid.ColumnSpan="2">
             <StatusBarItem Height="{Binding ElementName=Status_Bar, Path=ActualHeight}">
-                <TextBlock Name="Keystore_Status" Text="{Binding Path=Status}"></TextBlock>
+                <TextBlock Name="Keystore_Status" Text="{Binding Path=Keystore.Address, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </StatusBarItem>
             <StatusBarItem Height="{Binding ElementName=Status_Bar, Path=ActualHeight}">
-                <TextBlock Name="Keystore_Address" Text="{Binding Path=Address}"></TextBlock>
+                <TextBlock Name="Keystore_Address" Text="{Binding Path=Keystore.Balance, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </StatusBarItem>
         </StatusBar >
         </Grid>

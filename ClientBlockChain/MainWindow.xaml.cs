@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.ServiceModel;
 using System.Text;
@@ -22,17 +26,16 @@ namespace ClientBlockChain
     /// </summary>
     public partial class MainWindow : Window
     {
-        //Per l'apertura della console di debug
-        [DllImport("Kernel32")]
-        public static extern void AllocConsole();
-
-        [DllImport("Kernel32")]
-        public static extern void FreeConsole();
         private NetNamedPipeBinding mBinding;
         private EndpointAddress mEp;
         private IWCF mChannel;
         private string mAddress = "net.pipe://localhost/WCFServices";
-        public Keystore Keystore;
+        public Keystore Keystore
+        {
+            get;set;
+        }
+
+        
 
         public MainWindow()
         {
@@ -41,27 +44,38 @@ namespace ClientBlockChain
             mBinding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
             mEp = new EndpointAddress(mAddress);
             mChannel = ChannelFactory<IWCF>.CreateChannel(mBinding, mEp);
-            AllocConsole();
-            Console.WriteLine("Client Connected");
+            this.Keystore = new Keystore("Non caricato");
+            
             this.DataContext = this;
         }
 
+        private void Keystore_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            
+        }
 
         private void Button_Load_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Insert [name] [password]");
-            string command = Console.ReadLine();
-            string[] exCommand = command.Split(' ');
+            string[] exCommand = new string[2];
+            exCommand[0] = "marco";
+            exCommand[1] = "password";
             mChannel.LoadKeyStore(exCommand[0], exCommand[1]);
-            this.Keystore = new Keystore(mChannel.GetKeystore());
+            string address = mChannel.GetKeystore();
+            this.Keystore.Address = address;
+            this.Keystore.Balance = mChannel.GetBalance();
         }
 
         private void Button_Create_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Insert [name] [password]");
-            string command = Console.ReadLine();
-            string[] exCommand = command.Split(' ');
+            string[] exCommand = new string[2];
+            exCommand[0] = "marco";
+            exCommand[1] = "password";
             mChannel.GenerateKeyStore(exCommand[0], exCommand[1]);
+            string address = mChannel.GetKeystore();
+            this.Keystore.Address = address;
+            this.Keystore.Balance = mChannel.GetBalance();
         }
+
+       
     }
 }
