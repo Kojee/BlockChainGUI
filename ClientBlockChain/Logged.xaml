@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ClientBlockChain"
       mc:Ignorable="d" 
-      Title="Logged" Height="350" Width="525" MinHeight="350" MinWidth="525">
+      Title="Logged" Height="Auto" Width="Auto">
 
     <Grid>
         <Grid.Background>
@@ -13,9 +13,11 @@
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="25" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -28,16 +30,16 @@
             </MenuItem>
         </Menu>
         <Label Grid.Row="1" Grid.Column="0">Address:</Label>
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,10" />
+        <TextBox Name="Address" Grid.Row="1" Grid.Column="1" Margin="0,0,0,10" />
         <Label Grid.Row="2" Grid.Column="0">Amount:</Label>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,10" />
-        
-        <StatusBar Name="Status_Bar" Grid.Row="3" Grid.ColumnSpan="2">
+        <TextBox Name="Amount" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10" />
+        <Button Name="Button_SendTransaction" Background="#E0E0E0" Grid.Row="3" Grid.ColumnSpan="2"  VerticalAlignment="Center" Click="Button_SendTransaction_Click">Send</Button>
+        <StatusBar Name="Status_Bar" Grid.Row="5" Grid.ColumnSpan="2">
             <StatusBarItem Height="{Binding ElementName=Status_Bar, Path=ActualHeight}">
-                <TextBlock Name="Keystore_Status" Text="{Binding Path=Keystore.Status}"></TextBlock>
+                <TextBlock Name="Keystore_Status" Text="{Binding Path=Keystore.Address}"></TextBlock>
             </StatusBarItem>
             <StatusBarItem Height="{Binding ElementName=Status_Bar, Path=ActualHeight}">
-                <TextBlock Name="Keystore_Address" Text="{Binding Path=Keystore.Address}"></TextBlock>
+                <TextBlock Name="Keystore_Address" Text="{Binding Path=Keystore.Balance}"></TextBlock>
             </StatusBarItem>
         </StatusBar>
     </Grid>

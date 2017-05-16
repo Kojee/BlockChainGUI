@@ -45,5 +45,13 @@ namespace ClientBlockChain
         /// <returns></returns>
         [OperationContract]
         double GetBalance();
+
+        /// <summary>
+        /// Inizializza e invia una transazione
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="amount"></param>
+        [OperationContract]
+        void SendTransaction(string address, double amount);
     }
 }

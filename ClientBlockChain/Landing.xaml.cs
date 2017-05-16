@@ -55,6 +55,8 @@ namespace ClientBlockChain
             string address = mChannel.GetKeystore();
             this.Keystore.Address = address;
             this.Keystore.Balance = mChannel.GetBalance();
+            window.Content = new Logged(this.window, Keystore);
+
         }
 
         private void Button_Create_Click(object sender, RoutedEventArgs e)
@@ -66,6 +68,7 @@ namespace ClientBlockChain
             string address = mChannel.GetKeystore();
             this.Keystore.Address = address;
             this.Keystore.Balance = mChannel.GetBalance();
+            window.Content = new Logged(this.window, Keystore);
         }
     }
 }

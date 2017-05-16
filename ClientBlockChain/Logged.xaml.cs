@@ -33,20 +33,35 @@ namespace ClientBlockChain
         private EndpointAddress mEp;
         private IWCF mChannel;
         private string mAddress = "net.pipe://localhost/WCFServices";
-        public Keystore Keystore;
         public Window window;
+        
+        public Keystore Keystore
+        {
+            get;
+            set;
+        }
+        
 
-        public Logged(Window window)
+        public Logged(Window window, Keystore keystore)
         {
             InitializeComponent();
             mBinding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
             mEp = new EndpointAddress(mAddress);
             mChannel = ChannelFactory<IWCF>.CreateChannel(mBinding, mEp);
-            AllocConsole();
             Console.WriteLine("Client Connected");
-            this.Keystore = new Keystore("No address loaded");
-            this.DataContext = Keystore;
+            this.Keystore = keystore;
+            this.DataContext = this;
             this.window = window;
+        }
+
+
+        private void Button_SendTransaction_Click(object sender, RoutedEventArgs e)
+        {
+            string address, amountString;
+            address = Address.Text;
+            amountString = Amount.Text;
+            double amount = Convert.ToDouble(amountString);
+            mChannel.SendTransaction(address, amount);
         }
     }
 }
