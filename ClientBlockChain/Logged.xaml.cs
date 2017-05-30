@@ -63,5 +63,11 @@ namespace ClientBlockChain
             double amount = Convert.ToDouble(amountString);
             mChannel.SendTransaction(address, amount);
         }
+
+        private void Button_StartMining_Click(object sender, RoutedEventArgs e)
+        {
+            
+            mChannel.StartMining();
+        }
     }
 }

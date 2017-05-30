@@ -16,6 +16,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="25" />
         </Grid.RowDefinitions>
@@ -34,7 +35,8 @@
         <Label Grid.Row="2" Grid.Column="0">Amount:</Label>
         <TextBox Name="Amount" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10" />
         <Button Name="Button_SendTransaction" Background="#E0E0E0" Grid.Row="3" Grid.ColumnSpan="2"  VerticalAlignment="Center" Click="Button_SendTransaction_Click">Send</Button>
-        <StatusBar Name="Status_Bar" Grid.Row="5" Grid.ColumnSpan="2">
+        <Button Name="Button_StartMining" Background="#E0E0E0" Grid.Row="4" Grid.ColumnSpan="2"  VerticalAlignment="Center" Click="Button_StartMining_Click">Start mining</Button>
+        <StatusBar Name="Status_Bar" Grid.Row="6" Grid.ColumnSpan="2">
             <StatusBarItem Height="{Binding ElementName=Status_Bar, Path=ActualHeight}">
                 <TextBlock Name="Keystore_Status" Text="{Binding Path=Keystore.Address}"></TextBlock>
             </StatusBarItem>
